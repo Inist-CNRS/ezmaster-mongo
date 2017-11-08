@@ -1,6 +1,6 @@
 #!/bin/bash
 # script looping indefinitly and doing each X hours
-# a mongodump into /data/dump folder
+# a mongodump into /ezdata/dump folder
 
 while true
 do
@@ -12,13 +12,13 @@ do
     sleep 1
   done  
 
-  DUMP_FILE=/data/dump/dump.$(date '+%Y-%m-%d_%Hh%M').archive
+  DUMP_FILE=/ezdata/dump/dump.$(date '+%Y-%m-%d_%Hh%M').archive
   echo "Creating a dump with mongodump in $DUMP_FILE"
   mongodump --quiet --archive=- > $DUMP_FILE
   
   echo "Cleaning old dump."
-  tmpreaper --verbose ${DUMP_CLEANUP_MORE_THAN_NBDAYS}d /data/dump/
+  tmpreaper --verbose ${DUMP_CLEANUP_MORE_THAN_NBDAYS}d /ezdata/dump/
 
-  echo "Waiting $PGDUMP_EACH_NBHOURS hours before next dump."
+  echo "Waiting $DUMP_EACH_NBHOURS hours before next dump."
   sleep ${DUMP_EACH_NBHOURS}h
 done

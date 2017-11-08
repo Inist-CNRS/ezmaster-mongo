@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# initialize data flags used by inherited docker-entrypoint.sh
+test ! -f /ezdata/db/WiredTiger && rm -f /data/db/WiredTiger
+test   -f /ezdata/db/WiredTiger && ln -s /ezdata/db/WiredTiger /data/db/
+test ! -f /ezdata/db/docker-initdb.log && rm -f /data/db/docker-initdb.log
+test   -f /ezdata/db/docker-initdb.log && ln -s /ezdata/db/docker-initdb.log /data/db/
+
 # inject config.json parameters to env
 # only if not already defined in env
 export DUMP_EACH_NBHOURS=${DUMP_EACH_NBHOURS:=$(jq -r -M .DUMP_EACH_NBHOURS /config.json | grep -v null)}

@@ -11,8 +11,12 @@ RUN apt-get -y update && apt-get -y install netcat jq tmpreaper vim python
 COPY config.json /
 COPY docker-entrypoint.overload.sh /usr/local/bin/
 
+# mongo data folder dedicated to ezmaster
+# because it's not yet (8 nov 2017) possible to UNVOLUME /data/db and /data/configdb
+RUN mkdir -p /ezdata/db && chown -R mongodb:mongodb /ezdata/db
+
 # backup stuff
-RUN mkdir -p /data/dump/
+RUN mkdir -p /ezdata/dump/
 COPY dump.periodically.sh /usr/local/bin/
 
 # basic http server stuff
@@ -26,8 +30,8 @@ RUN echo '{ \
   "httpPort": 8080, \
   "configPath": "/config.json", \
   "configType": "json", \
-  "dataPath": "/data" \
+  "dataPath": "/ezdata" \
 }' > /etc/ezmaster.json
 
 ENTRYPOINT [ "docker-entrypoint.overload.sh" ]
-CMD [ "mongod", "--bind_ip_all" ]
+CMD [ "mongod", "--bind_ip_all", "--dbpath", "/ezdata/db" ]
