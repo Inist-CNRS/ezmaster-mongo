@@ -23,14 +23,15 @@ COPY dump.periodically.sh /usr/local/bin/
 RUN mkdir /www
 COPY index.* /www/
 
-# ezmasterization of refgpec
+# ezmasterization of ezmaster-mongo
 # see https://github.com/Inist-CNRS/ezmaster
 # notice: httpPort is useless here but as ezmaster require it (v3.8.1) we just add a wrong port number
 RUN echo '{ \
   "httpPort": 8080, \
   "configPath": "/config.json", \
   "configType": "json", \
-  "dataPath": "/ezdata" \
+  "dataPath": "/ezdata", \
+  "technicalInstance": true \
 }' > /etc/ezmaster.json
 
 ENTRYPOINT [ "docker-entrypoint.overload.sh" ]
