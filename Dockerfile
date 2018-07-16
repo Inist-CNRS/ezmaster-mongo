@@ -31,7 +31,7 @@ RUN echo '{ \
   "configPath": "/config.json", \
   "configType": "json", \
   "dataPath": "/ezdata", \
-  "technicalInstance": true \
+  "technicalApplication": true \
 }' > /etc/ezmaster.json
 
 ENTRYPOINT [ "docker-entrypoint.overload.sh" ]
