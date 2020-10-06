@@ -14,7 +14,7 @@ export DUMP_CLEANUP_MORE_THAN_NBDAYS=${DUMP_CLEANUP_MORE_THAN_NBDAYS:=$(jq -r -M
 # backup/dump stuff
 dump.periodically.sh &
 
-# basic http server for displaing a basic informative html page for ezmaster 
+# basic http server for displaing a basic informative html page for ezmaster
 cd /www && python -m SimpleHTTPServer 8080 &
 
 # start mongodb daemon

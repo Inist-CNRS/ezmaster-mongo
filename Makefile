@@ -7,3 +7,6 @@ help:
 
 build: ## build the docker inistcnrs/ezmaster-mongo:1.0.3 image locally
 	@docker build -t inistcnrs/ezmaster-mongo:1.0.3 --build-arg http_proxy --build-arg https_proxy .
+
+run-debug: ## to debug locally
+	@docker run inistcnrs/ezmaster-mongo:1.0.3

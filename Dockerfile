@@ -1,4 +1,4 @@
-FROM mongo:3.5.13
+FROM mongo:4.4.1-bionic
 
 # need jq to parse JSON
 # netcat to wait for when mongo is ready to listen
@@ -35,4 +35,4 @@ RUN echo '{ \
 }' > /etc/ezmaster.json
 
 ENTRYPOINT [ "docker-entrypoint.overload.sh" ]
-CMD [ "mongod", "--bind_ip_all", "--dbpath", "/ezdata/db" ]
+CMD [ "mongod", "--bind_ip_all", "--dbpath", "/ezdata/db", "--nounixsocket" ]
