@@ -1,4 +1,4 @@
-FROM mongo:4.4.1-bionic
+FROM mongo:4.4.4-bionic
 
 # need jq to parse JSON
 # netcat to wait for when mongo is ready to listen
